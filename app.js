@@ -69,7 +69,6 @@ function buildRiskMessage(course, student, attendancePct, promedio, teacher){
 
 
 // ====== Auth helpers ======
-const SESSION_KEY = 'session_user_v1';
 
 function parseCSV(text){
   // Simple CSV parser (no quoted commas); fits our sheet
