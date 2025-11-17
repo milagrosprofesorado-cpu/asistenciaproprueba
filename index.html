@@ -5,95 +5,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Asistencia de Estudiantes</title>
 
-    <!-- Tailwind -->
+    <!-- Tailwind (OK para desarrollo) -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Manifest -->
+    <!-- Manifest PWA -->
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#24496e" />
 
-    <!-- SheetJS (solo para exportar .xlsx locales) -->
-    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" crossorigin></script>
-
+    <!-- Estilos extra -->
     <style>
-      :root{
-        --azul:#24496e;
-        --crema:#f3efdc;
-        --violeta:#6c467e;
-        --salmon:#da6863;
+      :root {
+        --azul: #24496e;
+        --crema: #f3efdc;
+        --violeta: #6c467e;
+        --salmon: #da6863;
       }
-      body{ background:var(--crema); }
+      body {
+        background: var(--crema);
+      }
     </style>
   </head>
+
   <body class="min-h-dvh text-slate-900">
+
+    <!-- React monta la aplicación aquí -->
     <div id="root"></div>
 
     <!-- React 18 -->
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 
-    
+    <!-- ❌ Firebase — ELIMINADO -->
+    <!-- NO poner Firebase nunca más. -->
 
+    <!-- ✔️ Supabase UMD (CORRECTO) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.4/dist/umd/supabase.min.js"></script>
     <script>
-      // Tu configuración de Firebase (sin cambios)
-      const firebaseConfig = {
-        apiKey: "AIzaSyCzgl9U2DLY16pXxvvvcJNeTshCgqfE6Y4",
-        authDomain: "pruebaasistenciapro.firebaseapp.com",
-        projectId: "pruebaasistenciapro",
-        storageBucket: "pruebaasistenciapro.firebasestorage.app",
-        messagingSenderId: "529599664915",
-        appId: "1:529599664915:web:95d12af5b78766901b40e6",
-        measurementId: "G-R0RNZKMLMJ"
-      };
-      // Inicializar Firebase
-      firebase.initializeApp(firebaseConfig);
-    </script>
-
-    <script>
-      // Config de autenticación (editable)
-      window.USERS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQOIYDnMQQtRVcPNPFnfmvVWiqFFqXjslfLjwq0totnyRFWLmQBfoiHS7rFqx2fnaqQMd7-RswWKOVe/pub?output=csv";
-      window.PASSWORD_API_URL = "https://script.google.com/macros/s/AKfycbx7_eYheJlTi3R8m45AyD2qwMXg2GwXMyRfoKNOiYenqYwGbOhzYg9pj0zV8oKBCsS2/exec";
-      window.SUPPORT_EMAIL = "docentxsbrown@gmail.com";
-    </script>
-
-    <!-- Supabase client (añadido) -->
-    <script src="https://esm.sh/@supabase/supabase-js@2"></script>
-
-    <script>
-      // Inicializa Supabase con tu proyecto (ya me diste estos valores)
       window.SUPABASE_URL = "https://arwzwdyaukilbsxvsfsl.supabase.co";
       window.SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyd3p3ZHlhdWtpbGJzeHZzZnNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzMzAwNjMsImV4cCI6MjA3ODkwNjA2M30.0s2D5YBdBqQnTsITB8T797iAmAZrEZrNRrttYmz9c_k";
-      window.supabase = supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+
+      window.supabase = supabase.createClient(
+        window.SUPABASE_URL,
+        window.SUPABASE_ANON_KEY
+      );
     </script>
 
-    <!-- Tu app (actualizada con integración Supabase) -->
+    <!-- Tu lógica de login Supabase -->
     <script src="auth_supabase.js"></script>
-<script src="app.js"></script>
-    <script>
-  ReactDOM.createRoot(document.getElementById("root"))
-    .render(React.createElement(AppShell));
-</script>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js').catch(()=>{});
-  }
-</script>
 
+    <!-- Tu app completa -->
+    <script src="app.js"></script>
+
+    <!-- Montaje final CORRECTO -->
+    <script>
+      ReactDOM.createRoot(document.getElementById("root"))
+        .render(React.createElement(AppShell));
+    </script>
+
+    <!-- Service worker -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./sw.js").catch(() => {});
+      }
+    </script>
+
+    <!-- Footer original intacto -->
     <footer class="p-6 md:p-8 text-sm text-slate-700">
       <div class="max-w-3xl mx-auto space-y-3">
-        <h3 class="text-base md:text-lg font-semibold" style="color:var(--azul)">¿Cómo instalar en el celular?</h3>
+
+        <h3 class="text-base md:text-lg font-semibold" style="color:var(--azul)">
+          ¿Cómo instalar en el celular?
+        </h3>
+
         <ol class="list-decimal ml-5 space-y-1">
           <li>En Android/Chrome: Menú ⋮ → <em>Agregar a la pantalla principal</em>.</li>
           <li>En iOS/Safari: Compartir → <em>Añadir a inicio</em>.</li>
         </ol>
+
         <div class="mt-8 text-center">
-          <a href="https://cafecito.app/docentesbrown" target="_blank" rel="noopener"
+          <a href="https://cafecito.app/docentesbrown"
+             target="_blank"
+             rel="noopener"
              class="inline-block px-5 py-3 rounded-2xl text-white font-semibold shadow"
              style="background:var(--salmon)">
             ☕ Bancanos con un cafecito
           </a>
         </div>
-        <!-- Nuevo botón: Exportar / Importar (después del cafecito) -->
+
         <div class="mt-4 text-center">
           <button onclick="window.__openExport()"
                   class="inline-block px-5 py-3 rounded-2xl text-white font-semibold shadow"
@@ -101,6 +99,7 @@
             📂 Exportar / Importar
           </button>
         </div>
+
       </div>
     </footer>
   </body>
